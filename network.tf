@@ -16,7 +16,7 @@ resource "aws_security_group" "sorry_cypress_alb" {
 
   tags = merge({
     Name = "SorryCypress ALB Security Group"
-  },var.tags)
+  }, var.tags)
 }
 
 resource "aws_security_group_rule" "allow_http_director" {
@@ -86,7 +86,7 @@ resource "aws_security_group" "sorry_cypress_fargate" {
 
   tags = merge({
     Name = "SorryCypress Fargate Security Group"
-  },var.tags)
+  }, var.tags)
 }
 resource "aws_security_group_rule" "allow_inbound_containers" {
   type              = "ingress"
