@@ -51,7 +51,7 @@ variable "certificate_arn" {
 }
 variable "docker_registry" {
   type        = string
-  default      = ""
+  default     = ""
   description = "The docker registry to pull sorry cypress images from"
 }
 variable "docker_registry_credentials" {
@@ -80,7 +80,21 @@ variable "ecs_cluster_id" {
   description = "define the complete ECS cluster ID if already existing ecs cluster exists"
 }
 
+## Auth part
+variable "oauth2_proxy_client_id_parameter_store_arn" {
+  type        = string
+  description = "oauth2 proxy client id addr"
+}
+variable "oauth2_proxy_client_secret_parameter_store_arn" {
+  type        = string
+  description = "oauth2 proxy client secret addr"
+}
+variable "auth2_proxy_cookie_secret_parameter_store_arn" {
+  type        = string
+  description = "oauth2 proxy cookie secret addr"
+}
+
 variable "tags" {
-  type = map(string)
+  type        = map(string)
   description = "tags"
 }

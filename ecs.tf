@@ -20,6 +20,7 @@ resource "aws_ecs_cluster" "sorry_cypress" {
   tags = var.tags
 }
 
+
 resource "aws_ecs_task_definition" "sorry_cypress" {
   family                   = "sorry-cypress"
   network_mode             = "awsvpc"
@@ -31,12 +32,15 @@ resource "aws_ecs_task_definition" "sorry_cypress" {
   container_definitions = templatefile(
     "${path.module}/container_definitions.json",
     {
-      logs_group_name             = local.log_group_name
-      region                      = "eu-west-3"
-      dns_name                    = aws_route53_record.sorry_cypress.fqdn
-      bucket_name                 = aws_s3_bucket.test_results_bucket.id
-      docker_registry             = var.docker_registry
-      docker_registry_credentials = var.docker_registry_credentials
+      logs_group_name                                = local.log_group_name
+      region                                         = "eu-west-3"
+      dns_name                                       = aws_route53_record.sorry_cypress.fqdn
+      bucket_name                                    = aws_s3_bucket.test_results_bucket.id
+      docker_registry                                = var.docker_registry
+      docker_registry_credentials                    = var.docker_registry_credentials
+      OAUTH2_PROXY_CLIENT_ID_PARAMETER_STORE_ARN     = var.oauth2_proxy_client_id_parameter_store_arn
+      OAUTH2_PROXY_CLIENT_SECRET_PARAMETER_STORE_ARN = var.oauth2_proxy_client_secret_parameter_store_arn
+      OAUTH2_PROXY_COOKIE_SECRET_PARAMETER_STORE_ARN = var.auth2_proxy_cookie_secret_parameter_store_arn
     }
   )
   tags = var.tags
